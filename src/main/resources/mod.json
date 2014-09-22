@@ -1,7 +1,9 @@
 {
 
   // Java verticle
-  "main":"com.m3958.vertx.backuper.Starter",
+  //"main":"com.m3958.vertx.backuper.Starter",
+  
+  "main": "think_test_verticle.clj",
 
   // In this example we also provide various other versions of the main verticle, you can uncomment this and
   // play around:

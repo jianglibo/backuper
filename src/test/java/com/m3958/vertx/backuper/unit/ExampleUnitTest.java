@@ -1,6 +1,6 @@
 package com.m3958.vertx.backuper.unit;
 
-import com.m3958.vertx.backuper.PingVerticle;
+import com.m3958.vertx.backuper.BlockedVerticle;
 import org.junit.Test;
 
 /*
@@ -24,7 +24,7 @@ public class ExampleUnitTest {
 
   @Test
   public void testVerticle() {
-    PingVerticle vert = new PingVerticle();
+    BlockedVerticle vert = new BlockedVerticle();
 
     // do something with verticle
   }

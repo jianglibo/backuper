@@ -9,9 +9,11 @@ import org.vertx.java.platform.Verticle;
 
 public class DirectoryWatcherVerticle extends Verticle {
 
+  public static String ADDRESS = "dir-watcher-address";
+
   @Override
   public void start() {
-    vertx.eventBus().registerHandler("dir-watcher", new Handler<Message<Boolean>>() {
+    vertx.eventBus().registerHandler(ADDRESS, new Handler<Message<Boolean>>() {
       @Override
       public void handle(Message<Boolean> message) {
         try {

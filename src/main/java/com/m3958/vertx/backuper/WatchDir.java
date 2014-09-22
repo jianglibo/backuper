@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.WatchEvent;
+import java.nio.file.WatchEvent.Kind;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -25,6 +26,12 @@ public class WatchDir {
   @SuppressWarnings("unchecked")
   static <T> WatchEvent<T> cast(WatchEvent<?> event) {
     return (WatchEvent<T>) event;
+  }
+  
+  public void unRegisterAll() {
+    for (WatchKey wk : keys.keySet()) {
+      wk.cancel();
+    }
   }
 
   /**
@@ -101,7 +108,7 @@ public class WatchDir {
       }
 
       for (WatchEvent<?> event : key.pollEvents()) {
-        WatchEvent.Kind kind = event.kind();
+        Kind<?> kind = event.kind();
 
         // TBD - provide example of how OVERFLOW event is handled
         if (kind == OVERFLOW) {
@@ -133,7 +140,6 @@ public class WatchDir {
       boolean valid = key.reset();
       if (!valid) {
         keys.remove(key);
-
         // all directories are inaccessible
         if (keys.isEmpty()) {
           break;
